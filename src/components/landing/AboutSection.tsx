@@ -1,6 +1,10 @@
 import React from 'react';
 import { Target, Flag, Award, Sparkles, Check } from 'lucide-react';
 import { OrganizationSettings } from '../../types';
+import nightRun from '../../assets/images/night_run_poster_1793544244194.jpg';
+import sportsHero from '../../assets/images/sports_hero_banner_1793544243318.jpg';
+import cyclingTour from '../../assets/images/cycling_tour_poster_1793544244532.jpg';
+import badmintonAction from '../../assets/images/badminton_action_poster_1793544244424.jpg';
 
 interface AboutSectionProps {
   settings: OrganizationSettings;
@@ -89,7 +93,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ settings, onExploreE
         <div className="lg:col-span-6 space-y-4">
           <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] bg-slate-900">
             <img
-              src="/src/assets/images/night_run_poster_1793544244194.jpg"
+              src="nightRun"
               alt="Community sports event finish line"
               className="w-full h-full object-cover"
             />
@@ -106,7 +110,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ settings, onExploreE
           <div className="grid grid-cols-3 gap-3">
             <div className="rounded-2xl overflow-hidden aspect-video bg-slate-200 shadow-sm border border-slate-200">
               <img
-                src="/src/assets/images/sports_hero_banner_1793544243318.jpg"
+                src="sportsHero"
                 alt="Track running"
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />

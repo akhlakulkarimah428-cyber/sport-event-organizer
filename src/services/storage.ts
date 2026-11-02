@@ -11,6 +11,11 @@ import {
   EventIDCardConfig
 } from '../types';
 
+import nightRun from '../../assets/images/night_run_poster_1793544244194.jpg';
+import sportsHero from '../../assets/images/sports_hero_banner_1793544243318.jpg';
+import cyclingTour from '../../assets/images/cycling_tour_poster_1793544244532.jpg';
+import badmintonAction from '../../assets/images/badminton_action_poster_1793544244424.jpg';
+
 const STORAGE_KEYS = {
   EVENTS: 'kinetix_events',
   REGISTRATIONS: 'kinetix_registrations',
@@ -54,28 +59,28 @@ const DEFAULT_GALLERY: GalleryItem[] = [
     id: 'gal-1',
     title: 'Gema Night Run Finishers Celebration',
     category: 'Running',
-    imageUrl: '/src/assets/images/night_run_poster_1793544244194.jpg',
+    imageUrl: nightRun,
     date: 'Desember 2025'
   },
   {
     id: 'gal-2',
     title: 'Morning Track & Field Sprint Session',
     category: 'Athletics',
-    imageUrl: '/src/assets/images/sports_hero_banner_1793544243318.jpg',
+    imageUrl: sportsHero,
     date: 'Januari 2026'
   },
   {
     id: 'gal-3',
     title: 'Peloton Ascending Ijen Highland Road',
     category: 'Cycling',
-    imageUrl: '/src/assets/images/cycling_tour_poster_1793544244532.jpg',
+    imageUrl: cyclingTour,
     date: 'Februari 2026'
   },
   {
     id: 'gal-4',
     title: 'Final Match Indonesia Open Smash',
     category: 'Badminton',
-    imageUrl: '/src/assets/images/badminton_action_poster_1793544244424.jpg',
+    imageUrl: badmintonAction,
     date: 'Maret 2026'
   }
 ];
@@ -175,7 +180,7 @@ const DEFAULT_EVENTS: SportEvent[] = [
     sportCategory: 'running',
     sportCategoryLabel: 'Running / Marathon',
     description: 'Rasakan sensasi gemerlap malam di jantung kota Bondowoso! Gema Night Run Bondowoso 2026 menghadirkan rute lari malam yang eksotis mengitari landmark bersejarah dan pusat kebudayaan Alun-alun Ki Ronggo Bondowoso dengan lighting megah dan hiburan musik di sepanjang race route.',
-    posterUrl: '/src/assets/images/night_run_poster_1793544244194.jpg',
+    posterUrl: nightRun,
     eventDate: '2026-12-15',
     eventTime: '18:30 WIB (Flag-off)',
     location: 'Alun-alun Bondowoso',
@@ -270,7 +275,7 @@ const DEFAULT_EVENTS: SportEvent[] = [
     sportCategory: 'cycling',
     sportCategoryLabel: 'Cycling / Sepeda',
     description: 'Taklukkan tanjakan legendaris Gunung Ijen dalam ajang gran fondo road bike paling menantang di Jawa Timur dengan elevasi gain hingga 1.800 mdpl dikelilingi hutan pinus nan asri.',
-    posterUrl: '/src/assets/images/cycling_tour_poster_1793544244532.jpg',
+    posterUrl: cyclingTour,
     eventDate: '2026-11-28',
     eventTime: '06:00 WIB',
     location: 'Banyuwangi - Bondowoso - Paltuding Ijen',
@@ -334,7 +339,7 @@ const DEFAULT_EVENTS: SportEvent[] = [
     sportCategory: 'badminton',
     sportCategoryLabel: 'Badminton / Bulutangkis',
     description: 'Kejuaraan bulutangkis terbuka se-Jawa & Bali mempertandingkan kategori Tunggal Putra, Tunggal Putri, dan Ganda Campuran dengan sistem gugur BWF Standard.',
-    posterUrl: '/src/assets/images/badminton_action_poster_1793544244424.jpg',
+    posterUrl: badmintonAction,
     eventDate: '2026-12-20',
     eventTime: '08:00 WIB',
     location: 'GOR Bulutangkis Gelora Merdeka',
