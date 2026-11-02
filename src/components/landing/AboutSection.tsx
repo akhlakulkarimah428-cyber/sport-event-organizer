@@ -89,48 +89,59 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ settings, onExploreE
           </div>
         </div>
 
-        {/* Right Column: Dynamic Editorial Photo Montage (6 Cols) */}
-        <div className="lg:col-span-6 space-y-4">
-          <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] bg-slate-900">
-            <img
-              src="nightRun"
-              alt="Community sports event finish line"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 text-white text-xs">
-              <span className="font-bold text-[#9BE34A] block uppercase text-[10px] tracking-wider">
-                Dokumentasi Acara
-              </span>
-              <span className="font-semibold text-sm">Gema Night Run & Festival Olahraga Komunitas</span>
-            </div>
-          </div>
+       {/* Right Column: Dynamic Editorial Photo Montage (6 Cols) */}
+<div className="lg:col-span-6 space-y-4">
+  <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] bg-slate-900">
+    <img
+      src={nightRun}
+      alt="Community sports event finish line"
+      className="w-full h-full object-cover"
+    />
 
-          {/* Sub photos strip */}
-          <div className="grid grid-cols-3 gap-3">
-            <div className="rounded-2xl overflow-hidden aspect-video bg-slate-200 shadow-sm border border-slate-200">
-              <img
-                src="sportsHero"
-                alt="Track running"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="rounded-2xl overflow-hidden aspect-video bg-slate-200 shadow-sm border border-slate-200">
-              <img
-                src="/src/assets/images/cycling_tour_poster_1793544244532.jpg"
-                alt="Cycling team"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="rounded-2xl overflow-hidden aspect-video bg-slate-200 shadow-sm border border-slate-200">
-              <img
-                src="/src/assets/images/badminton_action_poster_1793544244424.jpg"
-                alt="Badminton arena"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-          </div>
-        </div>
+    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+    <div className="absolute bottom-4 left-4 right-4 text-white text-xs">
+      <span className="font-bold text-[#9BE34A] block uppercase text-[10px] tracking-wider">
+        Dokumentasi Acara
+      </span>
+      <span className="font-semibold text-sm">
+        Gema Night Run & Festival Olahraga Komunitas
+      </span>
+    </div>
+  </div>
+
+  {/* Sub photos strip */}
+  <div className="grid grid-cols-3 gap-3">
+
+    {/* Running */}
+    <div className="rounded-2xl overflow-hidden aspect-video bg-slate-200 shadow-sm border border-slate-200">
+      <img
+        src={sportsHero}
+        alt="Track running"
+        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+      />
+    </div>
+
+    {/* Cycling */}
+    <div className="rounded-2xl overflow-hidden aspect-video bg-slate-200 shadow-sm border border-slate-200">
+      <img
+        src={cyclingTour}
+        alt="Cycling team"
+        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+      />
+    </div>
+
+    {/* Badminton */}
+    <div className="rounded-2xl overflow-hidden aspect-video bg-slate-200 shadow-sm border border-slate-200">
+      <img
+        src={badmintonAction}
+        alt="Badminton arena"
+        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+      />
+    </div>
+
+  </div>
+</div>
 
       </div>
     </section>
