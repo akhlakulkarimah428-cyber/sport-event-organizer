@@ -27,6 +27,93 @@ const STORAGE_KEYS = {
   PARTICIPANT_IDCARDS: 'kinetix_participant_idcards'
 };
 
+const LEGACY_IMAGE_URLS: Record<string, string> = {
+  // Alias lama
+  nightRun,
+  sportsHero,
+  cyclingTour,
+  badmintonAction,
+
+  // Nama file asli
+  'night_run_poster_1793544244194.jpg': nightRun,
+  'sports_hero_banner_1793544243318.jpg': sportsHero,
+  'cycling_tour_poster_1793544244532.jpg': cyclingTour,
+  'badminton_action_poster_1793544244424.jpg': badmintonAction,
+
+  // Path lama
+  '/src/assets/images/night_run_poster_1793544244194.jpg': nightRun,
+  '/src/assets/images/sports_hero_banner_1793544243318.jpg': sportsHero,
+  '/src/assets/images/cycling_tour_poster_1793544244532.jpg': cyclingTour,
+  '/src/assets/images/badminton_action_poster_1793544244424.jpg': badmintonAction
+};
+
+/**
+ * Mengubah URL gambar bawaan versi lama menjadi URL asset hasil build Vite.
+ * URL gambar custom atau URL eksternal tetap dipertahankan.
+ */
+const resolveImageUrl = (imageUrl: string): string => {
+  if (!imageUrl || typeof imageUrl !== 'string') {
+    return imageUrl;
+  }
+
+  const cleanUrl = imageUrl.split(/[?#]/, 1)[0];
+  const fileName = cleanUrl.split('/').pop() || cleanUrl;
+
+  return (
+    LEGACY_IMAGE_URLS[imageUrl] ||
+    LEGACY_IMAGE_URLS[cleanUrl] ||
+    LEGACY_IMAGE_URLS[fileName] ||
+    imageUrl
+  );
+};
+
+/**
+ * Normalisasi URL poster event.
+ */
+const normalizeEventImages = (events: SportEvent[]): SportEvent[] => {
+  let changed = false;
+
+  const normalized = events.map(event => {
+    const posterUrl = resolveImageUrl(event.posterUrl);
+
+    if (posterUrl !== event.posterUrl) {
+      changed = true;
+      return {
+        ...event,
+        posterUrl
+      };
+    }
+
+    return event;
+  });
+
+  return changed ? normalized : events;
+};
+
+/**
+ * Normalisasi URL gambar gallery.
+ */
+const normalizeGalleryImages = (gallery: GalleryItem[]): GalleryItem[] => {
+  let changed = false;
+
+  const normalized = gallery.map(item => {
+    const imageUrl = resolveImageUrl(item.imageUrl);
+
+    if (imageUrl !== item.imageUrl) {
+      changed = true;
+      return {
+        ...item,
+        imageUrl
+      };
+    }
+
+    return item;
+  });
+
+  return changed ? normalized : gallery;
+};
+
+
 const DEFAULT_SETTINGS: OrganizationSettings = {
   name: 'KINETIX Sports Organizer',
   tagline: 'Make Every Moment a New Challenge',
@@ -597,18 +684,46 @@ class StorageService {
 
   // --- EVENTS ---
   getEvents(): SportEvent[] {
-    if (typeof window === 'undefined') return DEFAULT_EVENTS;
-    try {
-      const data = localStorage.getItem(STORAGE_KEYS.EVENTS);
-      if (!data) {
-        localStorage.setItem(STORAGE_KEYS.EVENTS, JSON.stringify(DEFAULT_EVENTS));
-        return DEFAULT_EVENTS;
-      }
-      return JSON.parse(data);
-    } catch {
+  if (typeof window === 'undefined') {
+    return DEFAULT_EVENTS;
+  }
+
+  try {
+    const data = localStorage.getItem(STORAGE_KEYS.EVENTS);
+
+    // Belum ada data: gunakan default event
+    if (!data) {
+      localStorage.setItem(
+        STORAGE_KEYS.EVENTS,
+        JSON.stringify(DEFAULT_EVENTS)
+      );
+
       return DEFAULT_EVENTS;
     }
+
+    const storedEvents: SportEvent[] = JSON.parse(data);
+
+    if (!Array.isArray(storedEvents)) {
+      return DEFAULT_EVENTS;
+    }
+
+    // Migrasi URL gambar lama
+    const normalizedEvents = normalizeEventImages(storedEvents);
+
+    // Simpan hanya jika ditemukan perubahan URL
+    if (normalizedEvents !== storedEvents) {
+      localStorage.setItem(
+        STORAGE_KEYS.EVENTS,
+        JSON.stringify(normalizedEvents)
+      );
+    }
+
+    return normalizedEvents;
+  } catch (error) {
+    console.error('Gagal mengambil data event:', error);
+    return DEFAULT_EVENTS;
   }
+}
 
   getEventBySlug(slug: string): SportEvent | undefined {
     return this.getEvents().find(e => e.slug === slug);
@@ -618,17 +733,31 @@ class StorageService {
     return this.getEvents().find(e => e.id === id);
   }
 
-  saveEvent(event: SportEvent): void {
-    const events = this.getEvents();
-    const index = events.findIndex(e => e.id === event.id);
-    if (index >= 0) {
-      events[index] = event;
-    } else {
-      events.unshift(event);
-    }
-    localStorage.setItem(STORAGE_KEYS.EVENTS, JSON.stringify(events));
-    this.notifyListeners();
+saveEvent(event: SportEvent): void {
+  const events = this.getEvents();
+
+  const normalizedEvent: SportEvent = {
+    ...event,
+    posterUrl: resolveImageUrl(event.posterUrl)
+  };
+
+  const index = events.findIndex(
+    e => e.id === normalizedEvent.id
+  );
+
+  if (index >= 0) {
+    events[index] = normalizedEvent;
+  } else {
+    events.unshift(normalizedEvent);
   }
+
+  localStorage.setItem(
+    STORAGE_KEYS.EVENTS,
+    JSON.stringify(events)
+  );
+
+  this.notifyListeners();
+}
 
   deleteEvent(id: string): void {
     const events = this.getEvents().filter(e => e.id !== id);
@@ -1062,20 +1191,52 @@ class StorageService {
   }
 
   // --- GALLERY ---
-  getGallery(): GalleryItem[] {
-    if (typeof window === 'undefined') return DEFAULT_GALLERY;
-    try {
-      const data = localStorage.getItem(STORAGE_KEYS.GALLERY);
-      return data ? JSON.parse(data) : DEFAULT_GALLERY;
-    } catch {
-      return DEFAULT_GALLERY;
-    }
+ getGallery(): GalleryItem[] {
+  if (typeof window === 'undefined') {
+    return DEFAULT_GALLERY;
   }
 
-  saveGallery(gallery: GalleryItem[]): void {
-    localStorage.setItem(STORAGE_KEYS.GALLERY, JSON.stringify(gallery));
-    this.notifyListeners();
+  try {
+    const data = localStorage.getItem(STORAGE_KEYS.GALLERY);
+
+    if (!data) {
+      return DEFAULT_GALLERY;
+    }
+
+    const storedGallery: GalleryItem[] = JSON.parse(data);
+
+    if (!Array.isArray(storedGallery)) {
+      return DEFAULT_GALLERY;
+    }
+
+    // Migrasi URL gambar lama
+    const normalizedGallery = normalizeGalleryImages(storedGallery);
+
+    if (normalizedGallery !== storedGallery) {
+      localStorage.setItem(
+        STORAGE_KEYS.GALLERY,
+        JSON.stringify(normalizedGallery)
+      );
+    }
+
+    return normalizedGallery;
+  } catch (error) {
+    console.error('Gagal mengambil data gallery:', error);
+    return DEFAULT_GALLERY;
   }
+}
+
+
+saveGallery(gallery: GalleryItem[]): void {
+  const normalizedGallery = normalizeGalleryImages(gallery);
+
+  localStorage.setItem(
+    STORAGE_KEYS.GALLERY,
+    JSON.stringify(normalizedGallery)
+  );
+
+  this.notifyListeners();
+}
 
   // --- ADMIN AUTH ---
   isAdminLoggedIn(): boolean {
