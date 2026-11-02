@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, Trophy, ShieldCheck, Zap, Users } from 'lucide-react';
+import nightRun from '../assets/images/night_run_poster_1793544244194.jpg';
+import sportsHero from '../assets/images/sports_hero_banner_1793544243318.jpg';
+import cyclingTour from '../assets/images/cycling_tour_poster_1793544244532.jpg';
+import badmintonAction from '../assets/images/badminton_action_poster_1793544244424.jpg';
 
 interface HeroSectionProps {
   onExploreEvents: () => void;
   onDiscoverAbout: () => void;
 }
 
-// Ganti / tambah path foto di sini
 const heroImages = [
-  '/src/assets/images/night_run_poster_1793544244194.jpg',
-  '/src/assets/images/sports_hero_banner_1793544243318.jpg',
-  '/src/assets/images/cycling_tour_poster_1793544244532.jpg',
-  '/src/assets/images/badminton_action_poster_1793544244424.jpg',
+  nightRun,
+  sportsHero,
+  cyclingTour,
+  badmintonAction,
 ];
 
 const SLIDE_DURATION_MS = 5000; // ganti sesuai kecepatan yang kamu mau
