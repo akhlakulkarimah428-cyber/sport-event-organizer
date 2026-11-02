@@ -1,0 +1,6 @@
+{
+  "name": "KINETIX - Sports Event Organizer Platform",
+  "description": "Platform penyelenggara event olahraga modern untuk lari, turnamen, pendaftaran multi-step, verifikasi pembayaran QRIS, e-ticket QR code, dan admin dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
