@@ -54,27 +54,27 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-2 text-xs text-slate-400 font-medium">
               <li>
-                <button onClick={() => onNavigate('home')} className="hover:text-white transition-colors">
+                <button onClick={() => onNavigate('home')} className="hover:text-[#9BE34A]  transition-colors">
                   Beranda
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('events')} className="hover:text-white transition-colors">
+                <button onClick={() => onNavigate('events')} className="hover:text-[#9BE34A]  transition-colors">
                   Jadwal Event Terbaru
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('about')} className="hover:text-white transition-colors">
+                <button onClick={() => onNavigate('about')} className="hover:text-[#9BE34A]  transition-colors">
                   Profil Organisasi
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('categories')} className="hover:text-white transition-colors">
+                <button onClick={() => onNavigate('categories')} className="hover:text-[#9BE34A]  transition-colors">
                   Cabang Olahraga
                 </button>
               </li>
               <li>
-                <button onClick={() => onNavigate('gallery')} className="hover:text-white transition-colors">
+                <button onClick={() => onNavigate('gallery')} className="hover:text-[#9BE34A]  transition-colors">
                   Galeri & Dokumentasi
                 </button>
               </li>
@@ -88,12 +88,12 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-2 text-xs text-slate-400 font-medium">
               <li>
-                <button onClick={onOpenLookup} className="text-[#9BE34A] hover:underline font-bold">
+                {/* <button onClick={onOpenLookup} className="text-white hover:underline font-bold">
                   Cek Status Registrasi & E-Ticket
-                </button>
+                </button> */}
               </li>
               <li>
-                <button onClick={() => onNavigate('events')} className="hover:text-white transition-colors">
+                <button onClick={() => onNavigate('events')} className="hover:text-[#9BE34A]  transition-colors">
                   Cara Pendaftaran Multi-Step
                 </button>
               </li>

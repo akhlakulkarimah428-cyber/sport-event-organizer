@@ -78,15 +78,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ settings, onExploreE
             </div>
           </div>
 
-          <div className="pt-2">
-            <button
-              onClick={onExploreEvents}
-              className="py-3 px-6 rounded-xl bg-[#101713] text-[#9BE34A] font-bold text-xs uppercase tracking-wider hover:bg-slate-800 transition-colors inline-flex items-center gap-2 shadow-md"
-            >
-              <span>Jelajahi Kalender Event</span>
-              {/* <Sparkles className="w-3.5 h-3.5" /> */}
-            </button>
-          </div>
+       
         </div>
 
        {/* Right Column: Dynamic Editorial Photo Montage (6 Cols) */}

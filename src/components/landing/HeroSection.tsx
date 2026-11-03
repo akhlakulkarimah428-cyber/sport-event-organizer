@@ -71,16 +71,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       )}
 
       {/* Content wrapper */}
-     <div className="relative z-10 flex flex-col justify-between min-h-screen px-4 sm:px-6 lg:px-16 pt-24 sm:pt-32 pb-6 sm:pb-12 max-w-7xl mx-auto">
-
+     <div className="relative z-10 flex flex-col justify-between min-h-screen px-4 sm:px-6 pt-24 sm:pt-32 pb-6 sm:pb-12 max-w-7xl mx-auto">
         {/* Top Tagline */}
         <div className="flex items-center gap-3">
           <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-white/10 backdrop-blur-md border border-white/20 text-[#9BE34A] tracking-wider uppercase">
             Official Sports Organizer
           </span>
-          <span className="hidden sm:inline-block text-xs text-slate-300 font-medium">
+          {/* <span className="hidden sm:inline-block text-xs text-slate-300 font-medium">
             Running · Football · Badminton · Cycling · Basketball
-          </span>
+          </span> */}
         </div>
 
         {/* Center/Bottom Content */}
@@ -99,7 +98,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
             <button
               onClick={onExploreEvents}
-              className="py-4 px-8 rounded-2xl bg-[#9BE34A] text-[#101713] font-black text-sm uppercase tracking-wider hover:bg-[#8cd43b] transition-all flex items-center gap-2 shadow-xl hover:shadow-[#9BE34A]/25"
+              className="py-4 px-8 rounded-2xl bg-[#9BE34A] text-[#101713] font-black text-sm uppercase tracking-wider hover:bg-[#8cd43b] transition-all flex items-center gap-2"
             >
               <span>Explore Events</span>
               {/* <ArrowUpRight className="w-4 h-4 stroke-[2.5]" /> */}
@@ -107,7 +106,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             <button
               onClick={onDiscoverAbout}
-              className="py-4 px-8 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm tracking-wide backdrop-blur-md border border-white/20 transition-all flex items-center gap-2"
+              className="py-4 px-8 rounded-2xl hover:bg-white/20 text-white font-bold text-sm tracking-wide backdrop-blur-md border border-white/20 transition-all flex items-center gap-2"
             >
               <span>Discover Our Organization</span>
             </button>
